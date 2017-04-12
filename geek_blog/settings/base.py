@@ -59,12 +59,6 @@ INSTALLED_APPS = [
 '#Identificador del sitio web de está aplicación'
 SITE_ID = 1
 
-'''
-Variables de configuración para el django-ckeditor.
-'''
-CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
-
-CKEDITOR_UPLOAD_PATH = 'upload/ckeditor'
 
 """
 Ruta en donde se encuentra la llave secreta de la aplicación de Google Drive SDK.

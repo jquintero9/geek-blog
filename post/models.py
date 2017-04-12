@@ -7,7 +7,6 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 from .utils import encode
 from gdstorage.storage import GoogleDriveStorage, GoogleDrivePermissionType, GoogleDrivePermissionRole, GoogleDriveFilePermission
 
@@ -57,7 +56,7 @@ class Post(models.Model):
         null=True,
         blank=True,
     )
-    contenido = RichTextField()
+    contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     ultima_actualizacion = models.DateTimeField(auto_now=True)
     autor = models.ForeignKey(User)
