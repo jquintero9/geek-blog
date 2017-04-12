@@ -20,7 +20,7 @@ de los archivos estaticos de la aplicación.
 """
 from whitenoise.django import DjangoWhiteNoise
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geek_post.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geek_blog.settings")
 
 application = get_wsgi_application()
 
