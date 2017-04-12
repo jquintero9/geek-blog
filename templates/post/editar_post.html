@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Editar Post{% endblock %}
+
+{% block content %}
+{% include 'post/mensajes.html' %}
+    <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+        {% include 'post/form_post.html' %}
+        <div class="contenedor-input">
+            <input class="input" type="submit" value="Editar" />
+        </div>
+    </form>
+{% endblock %}

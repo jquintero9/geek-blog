@@ -1,0 +1,85 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="contenedor-form">
+<h2 class="titulo-login">{% trans "Sign In" %}</h2>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<div id="mensaje-registro">
+<p>Por favor inicie sesión una cuenta de Facebook, Twitter o Google+. Para ver el contenido del sitio.</p>
+</div>
+
+<div class="socialaccount_ballot">
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+</div>
+<p class="parrafo">
+    O si quieres puedes crear una nueva cuenta en <a href="{{ signup_url }}">Geek Post.</a>
+</p>
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+    <p class="parrafo">Si ya tienes una cuenta en Geek Post, entonces inicia sesión aqui:</p>
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {% if form.errors %}
+    <div class="contenedor-mensaje">
+        {{form.non_field_errors}}
+    </div>
+    {% endif %}
+
+    <!--Mensajes de error para el campo de login-->
+    {% if form.login.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.login.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Login-->
+    <div class="contenedor-input">
+        <label for="id_login"><b>Usuario:</b></label>
+        {{ form.login }}
+    </div>
+    <!--Mensajes de error para el campo de password-->
+    {% if form.password.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.password.errors %}
+        <div><span>{{error}}</span></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo password-->
+    <div class="contenedor-input">
+        <label for="id_login"><b>Contraseña:</b></label>
+        {{ form.password }}
+    </div>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+    <div class="contenedor-input">
+        <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    </div>
+    <div class="contenedor-input">
+        <a id="recuperar-password" class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    </div>
+</form>
+</div>
+
+
+{% endblock %}
+
+

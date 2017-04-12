@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_title %}No se encontró la página.{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<h1 class="titulo-403 icon-search">Página no encontrada</h1>
+<div class="contenedor-error">
+    <p>La página que busca, actualmente no existe.</p>
+    <a href="{% url 'articulo:lista_articulos' %}" class="boton-home icon-home">Regresar</a>
+</div>
+
+
+{% endblock %}

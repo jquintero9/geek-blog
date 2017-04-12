@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Acceso Denegado{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<h1 class="titulo-403 icon-warning">ACCESO DENEGADO</h1>
+<div class="contenedor-error">
+    <p>No estás autorizado para acceder a este contenido.</p>
+    <a href="{% url 'post:lista' %}" class="boton-home icon-home">Regresar</a>
+</div>
+
+
+{% endblock %}

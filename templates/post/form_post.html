@@ -1,0 +1,58 @@
+<!-- Muestra los errores en el campo titulo -->
+{% if form.titulo.errors %}
+<div class="contenedor-mensaje error">
+    {% for error in form.titulo.errors %}
+    <span>{{error}}</span>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Campo Titulo -->
+<div class="contenedor-input">
+	<label for="id_titulo"><b>Titulo:</b></label>
+	{{form.titulo}}
+</div>
+
+<!-- Muestra los errores en el campo contenido -->
+{% if form.contenido.errors %}
+<div class="contenedor-mensaje error">
+    {% for error in form.contenido.errors %}
+    <span>{{error}}</span>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Campo contenido -->
+<div class="contenedor-input">
+	<label for="id_contenido"><b>Contenido:</b></label>
+	{{form.contenido}}
+</div>
+
+<!-- Muestra los errores en el campo categoría -->
+{% if form.categoria.errors %}
+<div class="contenedor-mensaje-error">
+    {% for error in form.categoria.errors %}
+    <span>{{error}}</span>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Campo categoría -->
+<div class="contenedor-input">
+    <label for="id_categoria"><b>Categoría: </b></label>
+    {{form.categoria}}
+</div>
+
+<!-- Muestra los errores en el campo imagen -->
+{% if form.imagen.errors %}
+<div class="contenedor-mensaje error">
+    {% for error in form.imagen.errors %}
+    <span>{{error}}</span>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Campo Imagen-->
+<div class="contenedor-input">
+	<label for="id_imagen" class="icon-imagen"><b>Imagen:</b></label>
+    <div>{{form.imagen}}</div>
+</div>
+
+

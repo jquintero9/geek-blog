@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block head_title %}Registrarse{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> {{form.non_field_errors}}
+</div>
+{% endif %}
+
+<div class="form-wrapper">
+<h3 class="titulo-panel">Registrate</h3>
+<div class="contenedor-input">
+    <p class="parrafo">¿Ya tienes una cuenta? <a href="{{ login_url }}">Inicia Sesión</a>.</p>
+</div>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}"> {% csrf_token %}
+    <!--Mensajes de error para el campo de username-->
+    {% if form.username.errors %}
+    <p class="bg-warning">
+        {% for error in form.username.errors %}
+        {{error}}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Campo Username-->
+    <div class="contenedor-input">
+        {{ form.username }}
+    </div>
+
+    <!--Mensajes de error para el campo de email-->
+    {% if form.email.errors %}
+    <p class="bg-warning">
+        {% for error in form.email.errors %}
+        {{error}}
+    </p>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Email-->
+    <div class="contenedor-input">
+        {{ form.email }}
+    </div>
+
+    <!--Mensajes de error para el campo de password 1-->
+    {% if form.password1.errors %}
+    <p class="bg-warning">
+        {% for error in form.password1.errors %}
+        {{error}}
+    </p>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Password1-->
+    <div class="contenedor-input">
+        {{ form.password1 }}
+    </div>
+
+    <!--Mensajes de error para el campo de password 2-->
+    {% if form.password2.errors %}
+    <p class="bg-warning">
+        {% for error in form.password2.errors %}
+        {{error}}
+    </p>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Password2-->
+    <div class="contenedor-input">
+        {{ form.password2 }}
+    </div>
+
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+    <div class="contenedor-input">
+        <button class="btn btn-primary submit-form" type="submit" >Registrarse</button>
+    </div>
+</form>
+</div>
+
+{% endblock %}

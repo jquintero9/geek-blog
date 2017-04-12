@@ -1,0 +1,87 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="contenedor-form">
+<h2 class="titulo-login">Registrate</h2>
+
+<p class="parrafo">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+    {% if form.errors %}
+    <div class="contenedor-mensaje">
+        {{form.non_field_errors}}
+    </div>
+    {% endif %}
+
+    <!--Mensajes de error para el campo de username-->
+    {% if form.username.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.username.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Username-->
+    <div class="contenedor-input">
+        <label for="id_username"><b>Usuario:</b></label>
+        {{ form.username }}
+    </div>
+
+    <!--Mensajes de error para el campo de email-->
+    {% if form.email.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.email.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Email-->
+    <div class="contenedor-input">
+        <label for="id_username"><b>Email:</b></label>
+        {{ form.email }}
+    </div>
+
+
+    <!--Mensajes de error para el campo de password 1-->
+    {% if form.password1.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.password1.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Password1-->
+    <div class="contenedor-input">
+        <label for="id_password1"><b>Contraseña:</b></label>
+        {{ form.password1 }}
+    </div>
+
+    <!--Mensajes de error para el campo de password 2-->
+    {% if form.password2.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.password2.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Password2-->
+    <div class="contenedor-input">
+        <label for="id_password2"><b>Repita la Contraseña:</b></label>
+        {{ form.password2 }}
+    </div>
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+    <div class="contenedor-input">
+        <button type="submit">Registrarse</button>
+    </div>
+</form>
+</div>
+
+{% endblock %}

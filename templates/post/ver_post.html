@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block head_title %}{{post.titulo}}{% endblock %}
+
+{% block content %}
+
+<!-- Blog Post Content Column -->
+<div class="col-lg-8">
+
+    <!-- Blog Post -->
+
+    <!-- Title -->
+    <h1>{{ post.titulo }}</h1>
+
+    <!-- Author -->
+    <p class="lead">
+        Autor <a href="#">{{ post.autor }}</a>
+    </p>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span>{{ post.fecha_publicacion }}</p>
+
+    <hr>
+
+    <!-- Preview Image -->
+    {% if post.imagen %}
+    <img class="img-responsive img-portada-articulo" src="{{ post.imagen.url }}" alt="">
+    {% endif %}
+    <hr>
+
+    <!-- Post Content -->
+    <article id="contenido-articulo">
+        {{ post.contenido | safe }}
+    </article>
+
+    <hr>
+
+    <!-- Blog Comments -->
+
+    <!-- Comments Form -->
+    <div class="well">
+        <h4>Comentar: </h4>
+        <form id="comentario-form" action="" method="POST" role="form"> {% csrf_token %}
+            <input type="hidden" name="usuario" value="{{ user_id }}" />
+            <input type="hidden" name="post" value="{{ post.get_id }}" />
+            <div class="form-group">
+                <textarea class="form-control comentario" name="comentario" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Comment -->
+    {% if comentarios %}
+    <section id="contenedor-comentarios">
+    {% for comentario in comentarios %}
+    <div class="media">
+
+        <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">{{ comentario.usuario }}
+                <small>{{ comentario.fecha }}</small>
+            </h4>
+            {{ comentario.comentario }}
+        </div>
+    </div>
+    {% endfor %}
+    </section>
+    {% else %}
+    <p>Este post no tiene comentarios.</p>
+    {% endif %}
+
+    <hr>
+</div>
+{% include 'post/categorias.html' %}
+{% endblock %}
+
+{% block javascriptfiles %}
+<script src="{% static 'js/procesar_comentario.js' %}"></script>
+{% endblock %}

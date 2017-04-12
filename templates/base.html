@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="Geek Post es un blog acerca de temas tecnológicos" />
+    <title>{% block head_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://file.myfontastic.com/MaQv9ELxzupxov3cqYdLwe/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    {% block header %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="brand-logo" class="navbar-brand" href="/">
+                    <img id="logo" src="{% static 'img/logo.png' %}" alt="Geek Post Logo" />
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="menu-header" class="nav navbar-nav navbar-right">
+                    <li><a class="icon-plus" href="{% url 'post:crear' %}">Crear Post</a></li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'usuario:perfil' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</a>
+                    </li>
+                    <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar</a></li>
+                    <li><a href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    {% endblock %}
+    <!-- Page Content -->
+    <div class="container">
+        <div id="contenedor" class="row">
+            {% block content %}
+            {% endblock %}
+        </div>
+        {% block footer %}
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Geek Post 2017</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+        {% endblock %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% block javascriptfiles %}
+    {% endblock %}
+</body>
+</html>

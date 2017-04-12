@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title_head %}{{ user }} - Perfil{% endblock %}
+
+{% block content %}
+
+<div>{{ user.username }}</div>
+<div>{{ user.email }}</div>
+
+{% if perfil %}
+<div>{{ perfil.nombres }}</div>
+<div>{{ perfil.apellidos }}</div>
+<div>{{ perfil.fecha_nacimiento }}</div>
+<div>{{ perfil.ciudad.pais }}</div>
+<div>{{ perfil.ciudad }}</div>
+<div>{{ perfil.genero }}</div>
+{% else %}
+<p>La información de tu perfil no está completada.</p>
+<p><a href="{% url 'usuario:editar_perfil' %}">Completar Información</a></p>
+{% endif %}
+
+{% endblock %}

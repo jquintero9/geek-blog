@@ -1,0 +1,194 @@
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    font-size: 16px;
+    font-family: "Dosis";
+}
+
+footer {
+    margin: 48px 0;
+}
+
+ul { list-style: none; }
+
+/* Estilos del contenedor */
+div#contenedor {
+    position: relative;
+}
+
+
+/* Estilos de la barra de navegación del header */
+.navbar-inverse {
+	background-color: rgb(142, 26, 26);
+}
+
+img#logo {
+    margin: 0 auto;
+    height: 50px;
+}
+
+a#brand-logo {
+    padding: 0;
+}
+
+ul#menu-header li a {
+    color: #FFF;
+    transition-duration: 0.4s;
+}
+
+ul#menu-header li a:hover {
+    color: #db6a6a;
+}
+
+/* Estilos de las imagenes de la portada del artículo */
+img.img-portada-articulo {
+    width: 900px;
+    height: 300px;
+}
+
+/* Estilos del contenido del artículo. */
+article#contenido-articulo p {
+    text-align: justify;
+}
+
+/* Estilos de la introducción del artículo */
+p.introduccion {
+	text-align: justify;
+	font-style: italic;
+	color: #666;
+}
+
+/* Estilos de la lista de categorías categorias.html */
+
+h3.titulo-panel {
+	padding: 10px;
+	border-radius: 8px 8px 0 0;
+	background-color: #650303;
+	color: #FFF;
+	text-align: center;
+}
+
+section#contenedor-categorias { margin-top: 5px; }
+
+div.categoria {
+	padding: 15px;
+	width: 100%;
+	border-bottom: 1px solid #DDD;
+}
+
+div.categoria a {
+	margin: 11px auto;
+	color: #db6a6a;
+	font-size: 1.1em;
+}
+
+div.categoria a::before { content: "> "; }
+
+div.categoria a:hover {
+	color: rgb(142, 26, 26);
+}
+
+/* Estilos del botón leer más */
+a.boton-leer-mas {
+    background-color: rgb(142, 26, 26);
+}
+
+a.boton-leer-mas:hover {
+    background-color: rgba(142, 26, 26, 0.9);
+}
+
+/* Estilos de la paginación */
+ul#paginacion li.active span {
+    background-color: rgb(142, 26, 26);
+    border-color: rgb(142, 26, 26);
+}
+
+ul#paginacion li a {
+    color: rgb(142, 26, 26);
+}
+
+/* Estilos para centrar las columnas */
+.col-center{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Estilos para los formularios */
+div.form-wrapper {
+    margin: 128px auto;
+    padding-bottom: 10px;
+    box-shadow: 1px 1px 2px 2px #DDD;
+    max-width: 360px;
+}
+
+div#form-reset { max-width: 480px; }
+
+
+div.alert {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 1em auto;
+    max-width: 360px;
+}
+
+/* Estilos para los botones de autenticación con redes socilales */
+a.socialaccount_provider {
+    display: block;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    font-size: 1.6em;
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
+    transition: all .4s;
+}
+
+a.socialaccount_provider span::before { margin-bottom: 5px; }
+
+a#facebook { background-color: #3b5998; }
+a#facebook:hover { background-color: rgba(59, 89, 152, 0.85); }
+
+a#twitter { background-color: #1da1f2; }
+a#twitter:hover { background-color: rgba(29, 161, 242, 0.8); }
+
+a#google { background-color: #dd4b39; }
+a#google:hover { background-color: rgba(221, 75, 57, 0.8); }
+
+div.contenedor-input {
+    margin: 0.5em auto;
+    width: 80%;
+    paddgin: 10px;
+}
+
+div.contenedor-input input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid #8E1A1A;
+    transition: all 0.4s:
+}
+
+div.contenedor-input input:focus { border-bottom: 2px solid #650303; }
+
+button.submit-form {
+    width: 100%;
+    background-color: #8E1A1A;
+    border-color: #B23B3B;
+    transition: all 0.4s;
+ }
+
+button.submit-form:hover {
+    background-color: #650303;
+    border-color: #8E1A1A;
+}
+
+div.panel-informacion {
+    margin: 128px auto;
+}
+
+h2.titulo-informacion { color: #3E0000; }

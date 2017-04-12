@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Posts{% endblock %}
+
+{% block content %}
+    <div class="col-md-8">
+        <h1 class="page-header">
+            Geek Post
+        </h1>
+        {% if posts %}
+        {% for post in posts%}
+        <h2>
+            <a href="{{ post.get_absolute_url }}">{{ post.titulo }}</a>
+        </h2>
+        <p class="lead">
+            Subido por <a href="#">{{ post.autor }}</a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> {{ post.fecha_publicacion }}</p>
+        <hr>
+        {% if post.imagen %}
+        <img class="img-responsive img-portada-articulo" src="{{ post.imagen.url }}" alt="post" />
+        {% endif %}
+        <hr>
+        {% autoescape off %}
+        <p class="introduccion">{{ post.get_introduccion }}</p>
+        <a class="btn btn-primary boton-leer-mas" href="{{ post.get_absolute_url }}">Leer más <span class="glyphicon glyphicon-chevron-right"></span></a>
+        {% endautoescape %}
+        <hr>
+        {% endfor %}
+        {% else %}
+        <div>La lista de posts está vacía.</div>
+        {% endif %}
+        <nav aria-label="Page navigation">
+            <ul id="paginacion" class="pagination pagination-lg">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">&laquo;</span>
+                    </span>
+                </li>
+                {% endif %}
+
+                {% if paginator.page_range %}
+                {% for i in paginator.page_range %}
+                {% if i == pagina_actual %}
+                <li class="active">
+                    <span>{{ i }}<span class="sr-only">(current)</span></span>
+                </li>
+                {% else %}
+                <li><a href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">&raquo;</span>
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <hr/>
+    </div>
+    {% include 'post/categorias.html' %}
+{% endblock %}

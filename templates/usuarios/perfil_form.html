@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title_head %}Completar perfil{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'usuario:editar_perfil' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    {% if form.errors %}
+    {{form.errors}}
+    {% endif %}
+    {{form.as_p}}
+    <button type="submit">Guardar</button>
+</form>
+
+{% endblock %}
