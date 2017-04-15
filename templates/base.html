@@ -35,7 +35,7 @@
                     <li><a class="icon-plus" href="{% url 'post:crear' %}">Crear Post</a></li>
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'usuario:perfil' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</a>
+                        <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</a>
                     </li>
                     <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</a></li>
                     {% else %}

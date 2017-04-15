@@ -122,3 +122,6 @@ class Comentario(models.Model):
 
     def __unicode__(self):
         return '%s - %s - %s' % (self.usuario, self.post, self.comentario)
+
+    def get_fecha(self):
+        return "%s" % self.fecha

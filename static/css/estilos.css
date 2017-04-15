@@ -51,6 +51,17 @@ article#contenido-articulo p {
     text-align: justify;
 }
 
+.well { position: relative; }
+
+form#comentario-form { margin-top: 32px; }
+
+div#mensaje-comentario { display: none; }
+
+img.media-object {
+    width: 64px;
+    height: 64px;
+}
+
 /* Estilos de la introducción del artículo */
 p.introduccion {
 	text-align: justify;

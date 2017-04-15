@@ -9,6 +9,8 @@ from .models import Post, Categoria, Comentario
 from .forms import PostForm, ComentarioForm
 from allauth.socialaccount.models import SocialAccount
 from .utils import encode, convertir_datos_comentarios
+import json
+from django.utils.dateparse import parse_datetime
 
 
 class ListaPost(ListView):
@@ -22,14 +24,6 @@ class ListaPost(ListView):
     model = Post
 
     def get(self, request, *args, **kwargs):
-        try:
-            user = SocialAccount.objects.get(user=request.user)
-            print vars(request.user)
-            print user.get_avatar_url()
-        except:
-            pass
-
-        #print request.user.get_avatar_url()
 
         if 'page' in request.GET:
             self.pagina_actual = int(request.GET['page'])
@@ -94,11 +88,10 @@ class ListaPostCategoria(ListView):
         return context
 
 
-class VerPost(LoginRequiredMixin, DetailView):
+class VerPost(DetailView):
     model = Post
     template_name = 'post/ver_post.html'
     context_object_name = 'post'
-    login_url = reverse_lazy('account_login')
     usuario = None
 
     def get(self, request, *args, **kwargs):
@@ -111,8 +104,9 @@ class VerPost(LoginRequiredMixin, DetailView):
         context['user_id'] = encode(self.usuario)
         post = kwargs['object']
 
-        comentarios = Comentario.objects.filter(post=post)
+        comentarios = Comentario.objects.filter(post=post).order_by('-fecha')
         context['comentarios'] = comentarios
+        context['form_comentario'] = ComentarioForm()
 
         return context
 
@@ -164,14 +158,26 @@ def comentar(request):
 
     if request.method == 'POST':
         data_form = convertir_datos_comentarios(request.body)
-
-        print data_form
-
         form = ComentarioForm(data=data_form)
 
         if form.is_valid():
-            form.save()
-            return HttpResponse('El comentario se ha guardado.')
+            instance = form.save()
+
+            try:
+                avatar = SocialAccount.objects.get(user=instance.usuario)
+                url_imagen = avatar.get_avatar_url()
+            except:
+                url_imagen = 'http://placehold.it/64x64'
+
+            object = {
+                'response': 'success',
+                'comentario': instance.comentario,
+                'usuario': instance.usuario.username,
+                'fecha': instance.get_fecha(),
+                'url': url_imagen
+            }
+
+            return HttpResponse(json.dumps(object))
         else:
-            return HttpResponse('Error al guardar el comentario.')
+            return HttpResponse(json.dumps({'response': 'fail'}))
 

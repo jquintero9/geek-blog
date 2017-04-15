@@ -44,13 +44,25 @@
     <!-- Comments Form -->
     <div class="well">
         <h4>Comentar: </h4>
+        <div id="mensaje-comentario" class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Warning!</strong> Ocurrio un error al enviar el comentario.
+        </div>
         <form id="comentario-form" action="" method="POST" role="form"> {% csrf_token %}
             <input type="hidden" name="usuario" value="{{ user_id }}" />
             <input type="hidden" name="post" value="{{ post.get_id }}" />
             <div class="form-group">
-                <textarea class="form-control comentario" name="comentario" rows="3"></textarea>
+                {{ form_comentario.comentario }}
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            {% if user.is_authenticated %}
+            <button id="enviar-comentario" type="submit" class="btn btn-primary">Enviar</button>
+            {% else %}
+            <div>
+                <span>
+                    Para comentar este post debes <a href="{% url 'account_login' %}">iniciar sesión.</a>
+                </span>
+            </div>
+            {% endif %}
         </form>
     </div>
 
@@ -61,7 +73,7 @@
     <div class="media">
 
         <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
+            <img class="media-object" src="{% if comentario.usuario.socialaccount_set.all.0.get_avatar_url %} {{ comentario.usuario.socialaccount_set.all.0.get_avatar_url }} {% else %}http://placehold.it/64x64{% endif %}">
         </a>
         <div class="media-body">
             <h4 class="media-heading">{{ comentario.usuario }}
