@@ -15,9 +15,9 @@ Se crean los permisos y la instancia del almacenamiento de Google Drive
 para guardar las imagenes de los posts.
 """
 permission =  GoogleDriveFilePermission(
-   GoogleDrivePermissionRole.READER,
-   GoogleDrivePermissionType.USER,
-   "jhjaquintero@gmail.com"
+   GoogleDrivePermissionRole.WRITER,
+   GoogleDrivePermissionType.ANYONE,
+
 )
 
 gd_storage = GoogleDriveStorage(permissions=(permission, ))
