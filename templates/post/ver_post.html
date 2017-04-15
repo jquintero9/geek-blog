@@ -67,8 +67,9 @@
     </div>
 
     <!-- Comment -->
-    {% if comentarios %}
     <section id="contenedor-comentarios">
+    {% if comentarios %}
+
     {% for comentario in comentarios %}
     <div class="media">
 
@@ -83,10 +84,10 @@
         </div>
     </div>
     {% endfor %}
-    </section>
     {% else %}
     <p>Este post no tiene comentarios.</p>
     {% endif %}
+    </section>
 
     <hr>
 </div>
